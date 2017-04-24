@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module("app", []).controller("home", function($http, $location) {
+            var self = this;
+            $http.get("/user").then(function(resp) {
+                console.log(resp);
+                self.user = resp.data.userAuthentication.details.name;
+                self.authenticated = true;
+            }, function(reason) {
+                console.log(reason);
+                self.user = "N/A";
+                self.authenticated = false;
+            });
+            self.logout = function() {
+                $http.post('/logout', {}).then(function (resp) {
+                    self.authenticated = false;
+                    $location.path('/');
+                }), function(error) {
+                    console.log(error);
+                    self.authenticated = false;
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-app="app" ng-controller="home as home" ng-cloak>
+<h1>Demo</h1>
+<div class="container" ng-show="!home.authenticated">
+    Login with: <a href="/login">Facebook</a>
+</div>
+<div class="container" ng-show="home.authenticated">
+    Logged in as: <span ng-bind="home.user"></span>
+    <div>
+        <button ng-click="home.logout()" class="btn bun-primary">Logout</button>
+    </div>
+</div>
+</body>
+</html>
