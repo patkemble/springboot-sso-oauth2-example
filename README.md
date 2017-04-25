@@ -7,4 +7,3 @@ This will also add in another Oauth2 provider (github) in addition to the existi
  Key points to reference in this branch
  * Propery declaration changes. Now the properties in the application.yml are rooted in their own entity trees
  * The use of a <code>CompositeFilter</code> for multiple Oauth2 providers
- 
