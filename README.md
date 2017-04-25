@@ -14,3 +14,8 @@ and from there be able to visit the index.html page @ http://localhost:8080/
 
 Clicking the Login button will prompt you for a Facebook username/password and then ask you for authorization (permission)
 that you would grant the requesting application (SsoExampleApplication) to use for an identity and claims
+
+
+## Oauth Client Config
+You can see the more elaborate setup and configuation available if you utilize some of the [lower level
+spring library on this branch](https://github.com/PhysicianExperience/sso-oauth2-example/tree/oauth-client)
